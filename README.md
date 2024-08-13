@@ -1,4 +1,4 @@
-# DXB Slider
+# DXB Slider - Customizable Range Slider with RTL Support and WCAG AA Accessibility features
 
 DXB Slider is a lightweight, customizable range slider component with a programmatically added number input. It's designed to be easy to implement, accessible, styleable, and supports both LTR and RTL layouts.
 
