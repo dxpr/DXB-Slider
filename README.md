@@ -2,8 +2,7 @@
 
 DXB Slider is a lightweight, customizable range slider component with a programmatically added number input. It's designed to be easy to implement, accessible, styleable, and supports both LTR and RTL layouts.
 
-<img width="1442" alt="Screenshot 2024-08-13 at 09 36 23" src="https://github.com/user-attachments/assets/556fd62c-1d5f-44e9-a26b-8f3c13be02f5">
-
+![Screenshot 2024-08-13 at 09 36 23](https://github.com/user-attachments/assets/556fd62c-1d5f-44e9-a26b-8f3c13be02f5)
 
 ## Features
 
@@ -13,6 +12,10 @@ DXB Slider is a lightweight, customizable range slider component with a programm
 *   Minimal JavaScript footprint
 *   Support for both LTR (Left-to-Right) and RTL (Right-to-Left) layouts
 *   Language-specific numeral display (pending broader browser adoption)
+
+## Installation
+
+To use DXB Slider, include the CSS and JavaScript files in your project, and follow the usage instructions below.
 
 ## Usage
 
@@ -104,6 +107,39 @@ DXB Slider is designed with accessibility in mind:
 *   Home: Set to minimum value
 *   End: Set to maximum value
 
+## Frequently Asked Questions (FAQ)
+
+*   **Q: How do I customize the slider's appearance?**
+    
+    A: You can customize the slider by modifying the CSS variables in the `:root` selector. Refer to the Customization section for more details.
+    
+*   **Q: Does DXB Slider support touch devices?**
+    
+    A: Yes, DXB Slider is designed to work on both desktop and touch devices.
+    
+*   **Q: How do I enable RTL support?**
+    
+    A: Add the `dir="rtl"` attribute to the container. Refer to the RTL Support section for more details.
+    
+*   **Q: What browsers are supported?**
+    
+    A: DXB Slider supports all modern browsers. Note that language-specific numeral features are currently best supported in Firefox.
+    
+*   **Q: How can I contribute to the project?**
+    
+    A: Contributions are welcome! Please open an issue or submit a pull request. Refer to the Contributing section for more details.
+    
+
+## Roadmap
+
+1.  Make default design fully WCAG AA or AAA compliant
+2.  Add support for tickmarks to aide stepped slider user experience
+3.  Add more design customization options, for example for the handle shape
+
 ## License
 
 This project is licensed under the GNU General Public License v2.0 (GPL-2.0) - see the LICENSE file for details.
+
+## Contributing
+
+Contributions are welcome! Please open an issue or submit a pull request.
