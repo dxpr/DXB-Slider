@@ -2,7 +2,7 @@
 
 DXB Slider is a lightweight, customizable range slider component with a programmatically added number input. It's designed to be easy to implement, accessible, styleable, and supports both LTR and RTL layouts.
 
-![image](https://github.com/user-attachments/assets/ff08f61f-209d-4cee-a26d-ded58f3eeecc)
+<img width="1442" alt="Screenshot 2024-08-13 at 09 36 23" src="https://github.com/user-attachments/assets/556fd62c-1d5f-44e9-a26b-8f3c13be02f5">
 
 
 ## Features
