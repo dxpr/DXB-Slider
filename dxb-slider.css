@@ -123,8 +123,9 @@
 }
 
 [dir="rtl"] .dxb-slider-value {
-    margin-inline-start: 0;
-    margin-inline-end: 10px;
+    margin-inline-start: 10px;
+    margin-inline-end: 0;
+    order: -1; /* This will move the number input to the left side in RTL mode */
 }
 
 [lang="ar"] .dxb-slider-value {
