@@ -1,5 +1,7 @@
 # DXB Slider - Customizable Range Slider with RTL Support and WCAG AA Accessibility features
 
+[https://dxpr.github.io/DXB-Slider/](DXB Slider demo page)
+
 DXB Slider is a lightweight, customizable range slider component with a programmatically added number input. It's designed to be easy to implement, accessible, styleable, and supports both LTR and RTL layouts.
 
 <img width="1359" alt="dxb-slider-chrome-firefox-safari" src="https://github.com/user-attachments/assets/f236c778-6377-4172-adb6-9e1408a1c6b7">
