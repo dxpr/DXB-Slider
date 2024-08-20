@@ -15,6 +15,7 @@ DXB Slider is a lightweight, customizable range slider component with a programm
 *   Minimal JavaScript footprint
 *   Support for both LTR (Left-to-Right) and RTL (Right-to-Left) layouts
 *   Language-specific numeral display (pending broader browser adoption)
+*   Optimized for mobile devices with appropriate software keyboard support
 
 ## Installation
 
@@ -52,6 +53,7 @@ To use DXB Slider, include the CSS and JavaScript files in your project, and fol
     
 4.  The sliders will be automatically initialized for all elements with the `data-dxb-slider` attribute. The script will dynamically add the number input.
     
+5.  The sliders will automatically adjust for mobile devices, displaying the appropriate software keyboard (numeric or decimal) based on the slider's configuration.
 
 ## RTL Support and Language-Specific Numerals
 
@@ -132,6 +134,19 @@ DXB Slider is designed with accessibility in mind:
     
     A: Contributions are welcome! Please open an issue or submit a pull request. Refer to the Contributing section for more details.
     
+*   **Q: How does DXB Slider handle input on mobile devices?**
+    
+    A: DXB Slider automatically displays the appropriate software keyboard (numeric or decimal) on mobile devices based on the slider's configuration. This ensures a smooth input experience for users on touch devices.
+
+## Mobile Support
+
+DXB Slider is optimized for mobile devices, providing an enhanced user experience:
+
+*   The number input field automatically triggers the appropriate software keyboard on mobile devices:
+    *   For whole number inputs, a numeric keyboard is displayed.
+    *   For decimal inputs (when the slider's `step` attribute includes decimals), a decimal keyboard is shown.
+*   The `pattern` attribute ensures that only valid numeric input is accepted.
+*   These optimizations work across modern mobile browsers, including Safari.
 
 ## Roadmap
 
