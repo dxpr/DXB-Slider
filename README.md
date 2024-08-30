@@ -159,7 +159,7 @@ DXB Slider is optimized for mobile devices, providing an enhanced user experienc
 
     A: Yes, DXB Slider automatically detects and initializes new sliders added to the page after the initial load.
     
-*   **Q:Is DXB Slider really only 1kB?**
+*   **Q:Is DXB Slider really only 1KB?**
 
     A: Yes, DXB Slider's minified payload is only 894 bytes at the time of writing. Feel free to count the bytes yourself:![image](https://github.com/user-attachments/assets/6ac9ad91-aebc-4c1d-b9ab-922bd6f6b51d)
 
