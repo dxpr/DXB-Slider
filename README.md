@@ -26,7 +26,7 @@ To use DXB Slider, include the CSS and JavaScript files in your project, and fol
 1.  Include the CSS in your `<head>` tag:
     
     ```
-    <link rel="stylesheet" href="path/to/dxb-slider.css">
+    <link rel="stylesheet" href="path/to/dxb-slider.min.css">
     ```
     
 2.  Add the HTML structure for your slider:
@@ -48,7 +48,7 @@ To use DXB Slider, include the CSS and JavaScript files in your project, and fol
 3.  Include the JavaScript at the end of your `<body>` tag:
     
     ```
-    <script src="path/to/dxb-slider.js"></script>
+    <script src="path/to/dxb-slider.min.js"></script>
     ```
     
 4.  The sliders will be automatically initialized for all elements with the `data-dxb-slider` attribute, including those added dynamically after page load.
