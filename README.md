@@ -1,4 +1,4 @@
-# DXB Slider - Customizable Range Slider with RTL Support and WCAG AA Accessibility features
+# DXB Slider - Customizable Range + Number Input Slider with RTL Support and WCAG AA Accessibility features
 
 [DXB Slider demo page](https://dxpr.github.io/DXB-Slider/)
 
