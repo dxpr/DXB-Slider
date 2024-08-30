@@ -51,7 +51,7 @@ To use DXB Slider, include the CSS and JavaScript files in your project, and fol
     <script src="path/to/dxb-slider.js"></script>
     ```
     
-4.  The sliders will be automatically initialized for all elements with the `data-dxb-slider` attribute. The script will dynamically add the number input.
+4.  The sliders will be automatically initialized for all elements with the `data-dxb-slider` attribute, including those added dynamically after page load.
     
 5.  The sliders will automatically adjust for mobile devices, displaying the appropriate software keyboard (numeric or decimal) based on the slider's configuration.
 
@@ -137,6 +137,10 @@ DXB Slider is designed with accessibility in mind:
 *   **Q: How does DXB Slider handle input on mobile devices?**
     
     A: DXB Slider automatically displays the appropriate software keyboard (numeric or decimal) on mobile devices based on the slider's configuration. This ensures a smooth input experience for users on touch devices.
+    
+*   **Q: Does DXB Slider support dynamically added content?**
+
+    A: Yes, DXB Slider automatically detects and initializes new sliders added to the page after the initial load.
 
 ## Mobile Support
 
@@ -153,6 +157,7 @@ DXB Slider is optimized for mobile devices, providing an enhanced user experienc
 1.  Make default design fully WCAG AA or AAA compliant
 2.  Add support for tickmarks to aide stepped slider user experience
 3.  Add more design customization options, for example for the handle shape
+4.  Optimize performance for pages with frequent DOM changes
 
 ## License
 
