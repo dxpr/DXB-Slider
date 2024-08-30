@@ -9,9 +9,15 @@
       const numberInput = document.createElement('input');
       numberInput.type = 'number';
       numberInput.className = 'dxb-slider-value';
-      numberInput.setAttribute('aria-hidden', 'true');
       numberInput.setAttribute('tabindex', '-1');
       numberInput.setAttribute('pattern', '[0-9]*');
+
+      const step = parseFloat(rangeInput.step);
+      if (step && step % 1 !== 0) {
+        numberInput.setAttribute('inputmode', 'decimal');
+      } else {
+        numberInput.setAttribute('inputmode', 'numeric');
+      }
 
       const step = parseFloat(rangeInput.step);
       if (step && step % 1 !== 0) {
