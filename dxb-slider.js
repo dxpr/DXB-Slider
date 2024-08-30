@@ -19,13 +19,6 @@
         numberInput.setAttribute('inputmode', 'numeric');
       }
 
-      const step = parseFloat(rangeInput.step);
-      if (step && step % 1 !== 0) {
-        numberInput.setAttribute('inputmode', 'decimal');
-      } else {
-        numberInput.setAttribute('inputmode', 'numeric');
-      }
-
       container.appendChild(numberInput);
 
       function updateValue() {
