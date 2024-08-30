@@ -94,6 +94,21 @@ You can customize the appearance of the slider by modifying the CSS variables in
 }
 ```
 
+## DXB Slider Feature Comparison
+
+| Feature                       | DXB Slider          | AlRangeSlider      | Ion.RangeSlider     | Simple Slider        | Bootstrap Slider    |
+|-------------------------------|---------------------|--------------------|---------------------|----------------------|---------------------|
+| **File Size**                  | 1 KB                | 75 KB              | 85 KB               | 15 KB                | 11 KB               |
+| **Dependency-free**            | ✅                  | ❌ (jQuery)        | ❌ (jQuery)         | ❌ (jQuery)          | ✅ (Optional)       |
+| **Supports Double Handle**     | ❌                  | ✅                 | ✅                  | ❌                   | ✅                  |
+| **RTL Support**                | ✅                  | ❌                 | ❌                  | ❌                   | ✅                  |
+| **Mobile Optimization**        | ✅                  | ❌                 | ✅                  | ❌                   | ✅                  |
+| **Accessibility Features**     | ✅                  | ❌                 | ❌                  | ❌                   | ✅                  |
+| **Built-in Themes/Skins**      | ❌                  | ❌                 | ✅ (6 skins)        | ✅                   | ✅                  |
+| **Touch Support**              | ✅                  | ❌                 | ✅                  | ✅                   | ✅                  |
+
+*Comparison of range slider plugins based on key features.*
+
 ## Accessibility
 
 DXB Slider is designed with accessibility in mind:
