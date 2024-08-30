@@ -112,6 +112,23 @@ DXB Slider is designed with accessibility in mind:
 *   Home: Set to minimum value
 *   End: Set to maximum value
 
+## Mobile Support
+
+DXB Slider is optimized for mobile devices, providing an enhanced user experience:
+
+*   The number input field automatically triggers the appropriate software keyboard on mobile devices:
+    *   For whole number inputs, a numeric keyboard is displayed.
+    *   For decimal inputs (when the slider's `step` attribute includes decimals), a decimal keyboard is shown.
+*   The `pattern` attribute ensures that only valid numeric input is accepted.
+*   These optimizations work across modern mobile browsers, including Safari.
+
+## Roadmap
+
+1.  Make default design fully WCAG AA or AAA compliant
+2.  Add support for tickmarks to aide stepped slider user experience
+3.  Add more design customization options, for example for the handle shape
+4.  Optimize performance for pages with frequent DOM changes
+
 ## Frequently Asked Questions (FAQ)
 
 *   **Q: How do I customize the slider's appearance?**
@@ -141,23 +158,11 @@ DXB Slider is designed with accessibility in mind:
 *   **Q: Does DXB Slider support dynamically added content?**
 
     A: Yes, DXB Slider automatically detects and initializes new sliders added to the page after the initial load.
+    
+*   **Q:Is DXB Slider really only 1kB?**
 
-## Mobile Support
+    A: Yes, DXB Slider's minified payload is only 894 bytes at the time of writing. Feel free to count the bytes yourself:![image](https://github.com/user-attachments/assets/6ac9ad91-aebc-4c1d-b9ab-922bd6f6b51d)
 
-DXB Slider is optimized for mobile devices, providing an enhanced user experience:
-
-*   The number input field automatically triggers the appropriate software keyboard on mobile devices:
-    *   For whole number inputs, a numeric keyboard is displayed.
-    *   For decimal inputs (when the slider's `step` attribute includes decimals), a decimal keyboard is shown.
-*   The `pattern` attribute ensures that only valid numeric input is accepted.
-*   These optimizations work across modern mobile browsers, including Safari.
-
-## Roadmap
-
-1.  Make default design fully WCAG AA or AAA compliant
-2.  Add support for tickmarks to aide stepped slider user experience
-3.  Add more design customization options, for example for the handle shape
-4.  Optimize performance for pages with frequent DOM changes
 
 ## License
 
