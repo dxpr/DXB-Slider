@@ -1,6 +1,6 @@
 {
   "name": "dxb_slider",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Customizable Range Slider with RTL Support and WCAG AA Accessibility features",
   "main": "dxb-slider.js",
   "scripts": {
