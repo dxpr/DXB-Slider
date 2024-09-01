@@ -37,6 +37,11 @@
       numberInput.addEventListener('input', () => {
         rangeInput.value = numberInput.value;
         updateValue();
+        rangeInput.dispatchEvent(new Event('input', { bubbles: true }));
+      });
+
+      numberInput.addEventListener('change', () => {
+        rangeInput.dispatchEvent(new Event('change', { bubbles: true }));
       });
 
       // Set initial ARIA attributes
