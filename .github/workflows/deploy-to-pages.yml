@@ -3,7 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - 1.x  # Set to your default branch
+      - 2.x  # Set to your default branch
 
 jobs:
   deploy:

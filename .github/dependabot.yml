@@ -5,7 +5,7 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
-    target-branch: "1.x"  # Matches your default branch from GitHub workflow
+    target-branch: "2.x"  # Matches your default branch from GitHub workflow
     labels:
       - "dependencies"
       - "npm"
@@ -22,7 +22,7 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
-    target-branch: "1.x"
+    target-branch: "2.x"
     labels:
       - "dependencies"
       - "github-actions"
