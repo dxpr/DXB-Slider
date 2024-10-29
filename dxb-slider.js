@@ -11,6 +11,7 @@
       numberInput.className = 'dxb-slider-value';
       numberInput.setAttribute('tabindex', '-1');
       numberInput.setAttribute('pattern', '[0-9]*');
+      numberInput.setAttribute('step', rangeInput.step);
 
       const step = parseFloat(rangeInput.step);
       if (step && step % 1 !== 0) {
