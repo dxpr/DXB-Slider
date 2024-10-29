@@ -3,13 +3,22 @@
 ## Development Setup
 
 1. Clone the repository
-2. Install dependencies (requires Node.js 14+):
+```bash
+git clone <repository-url>
+cd slider
+```
+
+2. Install dependencies (requires Node.js 22+):
 ```bash
 npm install
 ```
+This will automatically:
+- Install all dependencies
+- Set up Git hooks for testing and commit message validation
 
 ## Available Commands
 
+- `npm test`: Runs the test suite
 - `npm start`: Runs the default gulp task which:
   - Minifies JS and CSS files
   - Watches for changes and automatically rebuilds
@@ -19,7 +28,19 @@ npm install
   - Minifies JavaScript (dxb-slider.js → dxb-slider.min.js)
   - Minifies CSS (dxb-slider.css → dxb-slider.min.css)
 
-- `npm run dev`: Runs only the watch task for development
+## Git Workflow
+
+The repository is set up with automated checks:
+- Pre-commit: Tests run automatically before each commit
+- Commit messages: Must follow the [Conventional Commits](https://www.conventionalcommits.org/) format
+  - Example: `feat: add RTL support`
+  - Example: `fix: resolve slider initialization issue`
+  - Example: `docs: update installation instructions`
+
+To skip checks in emergency situations:
+```bash
+git commit -m "feat: urgent update" --no-verify
+```
 
 ## File Structure
 
