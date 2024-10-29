@@ -8,9 +8,12 @@
     <style>
         body {
             font-family: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            max-width: 350px;
         }
-        .dxb-slider-container {
-            width: 350px;
+        label {
+            margin-bottom: 10px;
+            font-weight: bold;
+            font-size: 1.2em;
         }
     </style>
 </head>
@@ -18,77 +21,59 @@
     <h1>DXB Slider Demo</h1>
 
     <h2>LTR (Left-to-Right) Mode</h2>
-    <div class="dxb-slider-container">
-        <label id="fontSizeLabel" for="fontSize">Font size</label>
-        <div class="dxb-slider-wrapper">
-            <div class="dxb-slider-track">
-                <input type="range" id="fontSize" class="dxb-slider" 
-                       min="1" max="100" value="51" step="1" 
-                       data-dxb-slider
-                       aria-labelledby="fontSizeLabel">
-            </div>
-        </div>
-    </div>
+    
+    <!-- Font size -->
+    <label for="fontSize">Font size</label>
+    <input type="range" 
+           data-dxb-slider 
+           id="fontSize"
+           min="0" max="100" 
+           value="58">
 
-    <div class="dxb-slider-container">
-        <label id="dropShadowLabel" for="dropShadow">Drop shadow</label>
-        <div class="dxb-slider-wrapper">
-            <div class="dxb-slider-track">
-                <input type="range" id="dropShadow" class="dxb-slider" 
-                       min="1" max="5" value="3" step="1" 
-                       data-dxb-slider
-                       aria-labelledby="dropShadowLabel">
-            </div>
-        </div>
-    </div>
+    <!-- Drop shadow -->
+    <label for="dropShadow">Drop shadow</label>
+    <input type="range" 
+           data-dxb-slider 
+           id="dropShadow"
+           min="1" max="5" 
+           value="3">
 
-    <div class="dxb-slider-container">
-        <label id="temperatureLabel" for="temperature">Temperature (°C)</label>
-        <div class="dxb-slider-wrapper">
-            <div class="dxb-slider-track">
-                <input type="range" id="temperature" class="dxb-slider" 
-                       min="0" max="100" value="25.5" step="0.1" 
-                       data-dxb-slider
-                       aria-labelledby="temperatureLabel">
-            </div>
-        </div>
-    </div>
+    <!-- Temperature -->
+    <label for="temperature">Temperature (°C)</label>
+    <input type="range" 
+           data-dxb-slider 
+           id="temperature"
+           min="0" max="100" 
+           value="34"
+           step="0.1">
 
     <h2>RTL (Right-to-Left) Mode</h2>
-    <div class="dxb-slider-container" dir="rtl" lang="ar">
-        <label id="fontSizeLabelRTL" for="fontSizeRTL">حجم الخط</label>
-        <div class="dxb-slider-wrapper">
-            <div class="dxb-slider-track">
-                <input type="range" id="fontSizeRTL" class="dxb-slider" 
-                       min="1" max="100" value="51" step="1" 
-                       data-dxb-slider
-                       aria-labelledby="fontSizeLabelRTL">
-            </div>
-        </div>
-    </div>
+    
+    <div dir="rtl" lang="ar">
+        <!-- Font size RTL -->
+        <label for="fontSizeRTL">حجم الخط</label>
+        <input type="range" 
+               data-dxb-slider 
+               id="fontSizeRTL"
+               min="0" max="100" 
+               value="51">
 
-    <div class="dxb-slider-container" dir="rtl" lang="ar">
-        <label id="dropShadowLabelRTL" for="dropShadowRTL">تأثير الظل</label>
-        <div class="dxb-slider-wrapper">
-            <div class="dxb-slider-track">
-                <input type="range" id="dropShadowRTL" class="dxb-slider" 
-                       min="1" max="5" value="3" step="1" 
-                       data-dxb-slider
-                       aria-labelledby="dropShadowLabelRTL">
-            </div>
-        </div>
-    </div>
+        <!-- Drop shadow RTL -->
+        <label for="dropShadowRTL">تأثير الظل</label>
+        <input type="range" 
+               data-dxb-slider 
+               id="dropShadowRTL"
+               min="1" max="5" 
+               value="3">
 
-    <div class="dxb-slider-container" dir="rtl" lang="ar">
-        <label id="weightLabelRTL" for="weightRTL">الوزن (كغم)</label>
-        <div class="dxb-slider-wrapper">
-            <div class="dxb-slider-track">
-                <input type="range" id="weightRTL" class="dxb-slider" 
-                       min="0" max="200" value="75.5" step="0.1" 
-                       data-dxb-slider
-                       aria-labelledby="weightLabelRTL">
-            </div>
-        </div>
+        <!-- Weight RTL -->
+        <label for="weightRTL">الوزن (كجم)</label>
+        <input type="range" 
+               data-dxb-slider 
+               id="weightRTL"
+               min="0" max="100" 
+               value="75.5"
+               step="0.1">
     </div>
 
     <script src="dxb-slider.min.js"></script>
