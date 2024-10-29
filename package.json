@@ -4,7 +4,7 @@
   "main": "dxb-slider.js",
   "scripts": {
     "test": "vitest run",
-    "build": "gulp",
+    "build": "gulp minify-js && gulp minify-css",
     "dev": "gulp watch",
     "start": "gulp",
     "prepare": "husky"
