@@ -8,12 +8,6 @@
     margin-bottom: 20px;
 }
 
-.dxb-slider-container label {
-    margin-bottom: 10px;
-    font-weight: bold;
-    font-size: 1.2em;
-}
-
 .dxb-slider-wrapper {
     display: flex;
     align-items: center;

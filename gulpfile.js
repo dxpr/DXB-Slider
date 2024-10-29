@@ -19,5 +19,11 @@ gulp.task('minify-css', function() {
     .pipe(gulp.dest('.'));
 });
 
+// Watch task
+gulp.task('watch', function() {
+  gulp.watch('dxb-slider.js', gulp.series('minify-js'));
+  gulp.watch('dxb-slider.css', gulp.series('minify-css'));
+});
+
 // Default task
-gulp.task('default', gulp.parallel('minify-js', 'minify-css'));
+gulp.task('default', gulp.parallel('minify-js', 'minify-css', 'watch'));
