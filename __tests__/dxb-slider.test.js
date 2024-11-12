@@ -4,8 +4,10 @@
    import path from 'path';
 
    describe('DXB Slider', () => {
-     let document;
-     let window;
+    let document;
+    let window;
+    let slider;
+    let numberInput;
 
      beforeEach(() => {
        const scriptContent = fs.readFileSync(path.resolve(__dirname, '../dxb-slider.js'), 'utf8');
@@ -26,22 +28,22 @@
        window = dom.window;
        global.document = document;
        global.window = window;
+
+       slider = document.querySelector('#mySlider');
+       numberInput = document.querySelector('.dxb-slider-value');
+
      });
 
      it('should initialize sliders with data-dxb-slider attribute', () => {
-       const slider = document.querySelector('#mySlider');
        expect(slider.hasAttribute('data-dxb-initialized')).toBe(true);
      });
 
      it('should create number input programmatically', () => {
-       const numberInput = document.querySelector('.dxb-slider-value');
        expect(numberInput).not.toBeNull();
        expect(numberInput.type).toBe('number');
      });
 
      it('should synchronize range and number input values', () => {
-       const slider = document.querySelector('#mySlider');
-       const numberInput = document.querySelector('.dxb-slider-value');
        slider.value = 75;
        slider.dispatchEvent(new window.Event('input'));
        expect(numberInput.value).toBe('75');
@@ -62,8 +64,6 @@
      });
 
      it('should dispatch change event on number input change', () => {
-       const slider = document.querySelector('#mySlider');
-       const numberInput = document.querySelector('.dxb-slider-value');
        const changeHandler = vi.fn();
 
        slider.addEventListener('change', changeHandler);
@@ -74,8 +74,6 @@
      });
 
      it('should synchronize values on number input change', () => {
-       const slider = document.querySelector('#mySlider');
-       const numberInput = document.querySelector('.dxb-slider-value');
        numberInput.value = 80;
        numberInput.dispatchEvent(new window.Event('input'));
 
@@ -83,14 +81,12 @@
      });
 
      it('should set initial ARIA attributes', () => {
-       const slider = document.querySelector('#mySlider');
        expect(slider.getAttribute('aria-valuemin')).toBe('0');
        expect(slider.getAttribute('aria-valuemax')).toBe('100');
        expect(slider.getAttribute('aria-valuenow')).toBe('50');
      });
 
      it('should update aria-valuenow on input', () => {
-       const slider = document.querySelector('#mySlider');
        slider.value = 75;
        slider.dispatchEvent(new window.Event('input'));
        expect(slider.getAttribute('aria-valuenow')).toBe('75');
