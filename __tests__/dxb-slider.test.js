@@ -3,7 +3,7 @@
    import fs from 'fs';
    import path from 'path';
 
-   describe('DXB Slider', () => {
+   describe('DXB Slider Core Tests', () => {
     let document;
     let window;
     let slider;
@@ -92,3 +92,68 @@
        expect(slider.getAttribute('aria-valuenow')).toBe('75');
      });
    });
+
+  describe('DXB Slider Step Tests', () => {
+    let document;
+    let window;
+    let slider;
+    let numberInput;
+
+    beforeEach(() => {
+      const scriptContent = fs.readFileSync(path.resolve(__dirname, '../dxb-slider.js'), 'utf8');
+
+      const dom = new JSDOM(`
+          <html>
+            <body>
+              <label for="mySlider">Slider Label</label>
+              <input type="range" id="mySlider" class="dxb-slider" 
+                      min="0" max="100" value="5" step="5" 
+                      data-dxb-slider>
+              <script>${scriptContent}</script>
+            </body>
+          </html>
+        `, { runScripts: "dangerously", resources: "usable" });
+
+      document = dom.window.document;
+      window = dom.window;
+      global.document = document;
+      global.window = window;
+
+      slider = document.querySelector('#mySlider');
+      numberInput = document.querySelector('.dxb-slider-value');
+
+    });
+
+    it('should have the same step value to both the slider and the number input', () => {
+      expect(slider.step).toBe("5");
+      expect(numberInput.step).toBe("5");
+    });
+
+    it('should update the number input when slider value changes', () => {
+      slider.value = 10;
+      slider.dispatchEvent(new window.Event('input'));
+      expect(numberInput.value).toBe("10");
+    });
+
+    it('should update the slider when number input value changes', () => {
+      numberInput.value = 15;
+      numberInput.dispatchEvent(new window.Event('input'));
+      expect(slider.value).toBe("15");
+    });
+
+    it('should keep slider in sync with number input on step increment', () => {
+      numberInput.value = 15;
+      numberInput.stepUp();
+      numberInput.dispatchEvent(new window.Event('input'));
+      expect(numberInput.value).toBe("20");
+      expect(slider.value).toBe("20");
+    });
+
+    it('should keep slider in sync with number input on step decrement', () => {
+      numberInput.value = 20;
+      numberInput.stepDown();
+      numberInput.dispatchEvent(new window.Event('input'));
+      expect(numberInput.value).toBe("15");
+      expect(slider.value).toBe("15");
+    });
+  });
