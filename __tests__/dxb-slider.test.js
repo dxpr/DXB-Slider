@@ -49,6 +49,12 @@ describe('DXB Slider Core Tests', () => {
     expect(numberInput.value).toBe('75');
   });
 
+  it('should synchronize range and number input values (0 based)', () => {
+    slider.value = 0;
+    slider.dispatchEvent(new window.Event('input'));
+    expect(numberInput.value).toBe('0');
+  });
+
   it('should initialize dynamically added sliders', async () => {
     const newSlider = document.createElement('input');
     newSlider.type = 'range';
@@ -68,6 +74,20 @@ describe('DXB Slider Core Tests', () => {
     numberInput.dispatchEvent(new window.Event('input'));
 
     expect(slider.value).toBe('80');
+  });
+
+  it('should synchronize values on number input change (0 based)', () => {
+    numberInput.value = "";
+    numberInput.dispatchEvent(new window.Event('input'));
+
+    expect(slider.value).toBe('0');
+  });
+
+  it('should synchronize values on number input change (empty)', () => {
+    numberInput.value = "";
+    numberInput.dispatchEvent(new window.Event('input'));
+
+    expect(numberInput.value).toBe('');
   });
 
   it('should set initial ARIA attributes', () => {
