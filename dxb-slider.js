@@ -1,26 +1,27 @@
 // dxb-slider.js
 
-(function() {
+(function () {
   function createSliderStructure(rangeInput) {
+
     // Create container and wrapper
     const container = document.createElement('div');
     container.className = 'dxb-slider-container';
-    
+
     const wrapper = document.createElement('div');
     wrapper.className = 'dxb-slider-wrapper';
-    
+
     const track = document.createElement('div');
     track.className = 'dxb-slider-track';
-    
+
     // Add slider class
     rangeInput.classList.add('dxb-slider');
-    
+
     // Restructure DOM
     rangeInput.parentNode.insertBefore(container, rangeInput);
     container.appendChild(wrapper);
     wrapper.appendChild(track);
     track.appendChild(rangeInput);
-    
+
     return wrapper;
   }
 
@@ -29,6 +30,7 @@
   }
 
   function updateFieldValue(field, value) {
+    
     // Handle empty value for number inputs
     if (field.type === "number") {
 
@@ -60,7 +62,7 @@
   function initDXBSliders() {
     document.querySelectorAll('[data-dxb-slider]:not([data-dxb-initialized])').forEach(rangeInput => {
       const wrapper = createSliderStructure(rangeInput);
-      
+
       // Create number input programmatically
       const numberInput = document.createElement('input');
       numberInput.type = 'number';
@@ -127,8 +129,8 @@
     for (const mutation of mutations) {
       if (mutation.type === 'childList') {
         for (const node of mutation.addedNodes) {
-          if (node.nodeType === Node.ELEMENT_NODE && 
-              (node.matches('[data-dxb-slider]') || node.querySelector('[data-dxb-slider]'))) {
+          if (node.nodeType === Node.ELEMENT_NODE &&
+            (node.matches('[data-dxb-slider]') || node.querySelector('[data-dxb-slider]'))) {
             shouldInit = true;
             break;
           }
