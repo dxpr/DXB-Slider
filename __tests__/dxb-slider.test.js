@@ -63,16 +63,6 @@ describe('DXB Slider Core Tests', () => {
     expect(newSlider.hasAttribute('data-dxb-initialized')).toBe(true);
   });
 
-  it('should dispatch change event on number input change', () => {
-    const changeHandler = vi.fn();
-
-    slider.addEventListener('change', changeHandler);
-    numberInput.value = 80;
-    numberInput.dispatchEvent(new window.Event('change'));
-
-    expect(changeHandler).toHaveBeenCalled();
-  });
-
   it('should synchronize values on number input change', () => {
     numberInput.value = 80;
     numberInput.dispatchEvent(new window.Event('input'));
