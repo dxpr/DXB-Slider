@@ -16,7 +16,7 @@ describe('DXB Slider Core Tests', () => {
          <html>
            <body>
              <label for="mySlider">Slider Label</label>
-             <input type="range" id="mySlider" class="dxb-slider" 
+             <input type="range" name="mySlider" id="mySlider" class="dxb-slider" 
                     min="0" max="100" value="50" step="1" 
                     data-dxb-slider>
              <script>${scriptContent}</script>
@@ -106,7 +106,7 @@ describe('DXB Slider Step Tests', () => {
           <html>
             <body>
               <label for="mySlider">Slider Label</label>
-              <input type="range" id="mySlider" class="dxb-slider" 
+              <input type="range" name="mySlider" id="mySlider" class="dxb-slider" 
                       min="0" max="100" value="5" step="5" 
                       data-dxb-slider>
               <script>${scriptContent}</script>
