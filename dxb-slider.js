@@ -24,6 +24,39 @@
     return wrapper;
   }
 
+  function getRangePercent(value = 0, min = 0, max = 0) {
+    return ((value - min) / (max - min)) * 100;
+  }
+
+  function updateFieldValue(field, value) {
+    // Handle empty value for number inputs
+    if (field.type === "number") {
+
+      // Keep empty for cleared input
+      field.value = value === "" ? "" : Number(value);
+    } else if (field.type === "range") {
+
+      // Default to 0 for range inputs if value is empty or NaN
+      const valueAsNumber = Number(value) || 0;
+      field.value = valueAsNumber;
+
+      // Calculate percentage for range input
+      const percent = getRangePercent(field.value, field.min, field.max);
+      field.style.setProperty('--value-percent', `${percent}%`);
+      field.setAttribute('aria-valuenow', field.value);
+    }
+  }
+
+  // Proxy object to synchronize field values and update all matching fields when a value changes
+  const sliderStateProxy = new Proxy({}, {
+    set(target, key, value) {
+      target[key] = value;
+      const fields = document.querySelectorAll(`[name="${key}"]`);
+      fields.forEach(field => updateFieldValue(field, value));
+      return true;
+    }
+  });
+
   function initDXBSliders() {
     document.querySelectorAll('[data-dxb-slider]:not([data-dxb-initialized])').forEach(rangeInput => {
       const wrapper = createSliderStructure(rangeInput);
@@ -45,34 +78,42 @@
 
       wrapper.appendChild(numberInput);
 
-      function updateValue() {
-        const val = rangeInput.value;
-        const min = rangeInput.min;
-        const max = rangeInput.max;
-        const percent = (val - min) / (max - min) * 100;
-        rangeInput.style.setProperty('--value-percent', `${percent}%`);
-        numberInput.value = val;
-        numberInput.min = min;
-        numberInput.max = max;
-        rangeInput.setAttribute('aria-valuenow', val);
+
+      function handleInputChange(e) {
+
+        // Only update fields within the DXB slider container's scope
+        if (!e.target.closest('.dxb-slider-container')) {
+          return;
+        }
+
+        sliderStateProxy[e.target.name] = e.target.value;
       }
 
-      rangeInput.addEventListener('input', updateValue);
-      numberInput.addEventListener('input', () => {
-        rangeInput.value = numberInput.value;
-        updateValue();
-        rangeInput.dispatchEvent(new Event('input', { bubbles: true }));
-      });
+      [rangeInput, numberInput].forEach(input =>
+        input.addEventListener('input', handleInputChange)
+      );
 
-      numberInput.addEventListener('change', () => {
-        rangeInput.dispatchEvent(new Event('change', { bubbles: true }));
-      });
+      // Initialize the proxy with the initial value of the range input
+      sliderStateProxy[rangeInput.name] = rangeInput.value;
 
       // Set initial ARIA attributes
       rangeInput.setAttribute('aria-valuemin', rangeInput.min);
       rangeInput.setAttribute('aria-valuemax', rangeInput.max);
 
-      updateValue();
+      // Populate inputs in first initiation
+      const value = rangeInput.value;
+      const min = rangeInput.min;
+      const max = rangeInput.max;
+
+      const percent = getRangePercent(value, min, max);
+      rangeInput.style.setProperty('--value-percent', `${percent}%`);
+
+      numberInput.value = value;
+      numberInput.min = min;
+      numberInput.max = max;
+      numberInput.name = rangeInput.name;
+
+      rangeInput.setAttribute('aria-valuenow', value);
 
       // Mark as initialized
       rangeInput.setAttribute('data-dxb-initialized', 'true');
