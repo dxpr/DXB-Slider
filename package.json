@@ -7,7 +7,9 @@
     "build": "gulp minify-js && gulp minify-css",
     "dev": "gulp watch",
     "start": "gulp",
-    "prepare": "husky"
+    "prepare": "husky",
+    "format:check": "prettier --check .",
+    "format:fix": "prettier --write ."
   },
   "repository": {
     "type": "git",
