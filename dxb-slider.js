@@ -53,7 +53,7 @@
   const sliderStateProxy = new Proxy({}, {
     set(target, key, value) {
       target[key] = value;
-      const fields = document.querySelectorAll(`[name="${key}"]`);
+      const fields = document.querySelectorAll(`[data-dxb-proxy-key="${key}"]`);
       fields.forEach(field => updateFieldValue(field, value));
       return true;
     }
@@ -88,7 +88,7 @@
           return;
         }
 
-        sliderStateProxy[e.target.name] = e.target.value;
+        sliderStateProxy[e.target.dataset["dxbProxyKey"]] = e.target.value;
       }
 
       [rangeInput, numberInput].forEach(input =>
@@ -96,7 +96,7 @@
       );
 
       // Initialize the proxy with the initial value of the range input
-      sliderStateProxy[rangeInput.name] = rangeInput.value;
+      sliderStateProxy[rangeInput.dataset["dxbProxyKey"]] = rangeInput.value;
 
       // Set initial ARIA attributes
       rangeInput.setAttribute('aria-valuemin', rangeInput.min);
@@ -114,6 +114,8 @@
       numberInput.min = min;
       numberInput.max = max;
       numberInput.name = rangeInput.name;
+
+      numberInput.setAttribute("data-dxb-proxy-key", rangeInput.dataset["dxbProxyKey"]);
 
       rangeInput.setAttribute('aria-valuenow', value);
 
