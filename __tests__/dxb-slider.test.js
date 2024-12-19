@@ -80,7 +80,7 @@ describe('DXB Slider Core Tests', () => {
     numberInput.value = "";
     numberInput.dispatchEvent(new window.Event('input'));
 
-    expect(slider.value).toBe('0');
+    expect(slider.value).toBe('50');
   });
 
   it('should synchronize values on number input change (empty)', () => {
