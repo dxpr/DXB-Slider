@@ -87,7 +87,7 @@ describe('DXB Slider Core Tests', () => {
     numberInput.value = "";
     numberInput.dispatchEvent(new window.Event('input'));
 
-    expect(numberInput.value).toBe('');
+    expect(numberInput.value).toBe('50');
   });
 
   it('should set initial ARIA attributes', () => {

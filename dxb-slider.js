@@ -35,7 +35,7 @@
       return 0;
     }
 
-    return Math.floor(convertedNum / 2);
+    return Math.ceil(convertedNum / 2);
   }
 
   function getRangePercent(value = 0, min = 0, max = 0) {
@@ -44,23 +44,17 @@
 
   function updateFieldValue(field, value) {
 
-    // Handle empty value for number inputs
-    if (field.type === "number") {
+    if (['number', 'range'].includes(field.type)) {
 
-      // Keep empty for cleared input
-      field.value = value === "" ? "" : Number(value);
-    } else if (field.type === "range") {
+      // Set value to default if empty, else convert to valid number
+      field.value = value || getDefaultValue(field.max);
 
-      // Default to 0 for range inputs if value is empty or NaN
-      const valueAsNumber = Number(value) || 0;
-
-      // Reset to default if the input is cleared or empty
-      field.value = valueAsNumber === 0 ? getDefaultValue(field.max) : valueAsNumber;
-
-      // Calculate percentage for range input
-      const percent = getRangePercent(field.value, field.min, field.max);
-      field.style.setProperty('--value-percent', `${percent}%`);
-      field.setAttribute('aria-valuenow', field.value);
+      // Apply additional settings for range inputs
+      if (field.type === "range") {
+        const percent = getRangePercent(field.value, field.min, field.max);
+        field.style.setProperty('--value-percent', `${percent}%`);
+        field.setAttribute('aria-valuenow', field.value);
+      }
     }
   }
 
