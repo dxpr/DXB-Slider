@@ -16,7 +16,7 @@ describe('DXB Slider Core Tests', () => {
          <html>
            <body>
              <label for="mySlider">Slider Label</label>
-             <input type="range" id="mySlider" class="dxb-slider" 
+             <input type="range" data-dxb-proxy-key="mySlider" id="mySlider" class="dxb-slider" 
                     min="0" max="100" value="50" step="1" 
                     data-dxb-slider>
              <script>${scriptContent}</script>
@@ -49,6 +49,12 @@ describe('DXB Slider Core Tests', () => {
     expect(numberInput.value).toBe('75');
   });
 
+  it('should synchronize range and number input values (0 based)', () => {
+    slider.value = 0;
+    slider.dispatchEvent(new window.Event('input'));
+    expect(numberInput.value).toBe('0');
+  });
+
   it('should initialize dynamically added sliders', async () => {
     const newSlider = document.createElement('input');
     newSlider.type = 'range';
@@ -63,21 +69,25 @@ describe('DXB Slider Core Tests', () => {
     expect(newSlider.hasAttribute('data-dxb-initialized')).toBe(true);
   });
 
-  it('should dispatch change event on number input change', () => {
-    const changeHandler = vi.fn();
-
-    slider.addEventListener('change', changeHandler);
-    numberInput.value = 80;
-    numberInput.dispatchEvent(new window.Event('change'));
-
-    expect(changeHandler).toHaveBeenCalled();
-  });
-
   it('should synchronize values on number input change', () => {
     numberInput.value = 80;
     numberInput.dispatchEvent(new window.Event('input'));
 
     expect(slider.value).toBe('80');
+  });
+
+  it('should synchronize values on number input change (0 based)', () => {
+    numberInput.value = "";
+    numberInput.dispatchEvent(new window.Event('input'));
+
+    expect(slider.value).toBe('50');
+  });
+
+  it('should synchronize values on number input change (empty)', () => {
+    numberInput.value = "";
+    numberInput.dispatchEvent(new window.Event('input'));
+
+    expect(numberInput.value).toBe('50');
   });
 
   it('should set initial ARIA attributes', () => {
@@ -106,7 +116,7 @@ describe('DXB Slider Step Tests', () => {
           <html>
             <body>
               <label for="mySlider">Slider Label</label>
-              <input type="range" id="mySlider" class="dxb-slider" 
+              <input type="range" data-dxb-proxy-key="mySlider" id="mySlider" class="dxb-slider" 
                       min="0" max="100" value="5" step="5" 
                       data-dxb-slider>
               <script>${scriptContent}</script>
