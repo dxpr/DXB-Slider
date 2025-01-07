@@ -15,6 +15,11 @@
             font-weight: bold;
             font-size: 1.2em;
         }
+        .slider-description {
+            margin-top: 5px;
+            color: #666;
+            font-size: 0.9em;
+        }
     </style>
 </head>
 <body>
@@ -29,6 +34,7 @@
            id="fontSize"
            min="0" max="100" 
            value="58">
+    <p class="slider-description">Range: 0-100, Default step (1)</p>
 
     <!-- Drop shadow -->
     <label for="dropShadow">Drop shadow</label>
@@ -37,6 +43,7 @@
            id="dropShadow"
            min="1" max="5" 
            value="3">
+    <p class="slider-description">Range: 1-5, Integer steps</p>
 
     <!-- Temperature -->
     <label for="temperature">Temperature (°C)</label>
@@ -46,6 +53,17 @@
            min="0" max="100" 
            value="34"
            step="0.1">
+    <p class="slider-description">Range: 0-100, Step: 0.1</p>
+
+    <!-- Investment -->
+    <label for="investment">Investment Amount ($)</label>
+    <input type="range" 
+           data-dxb-slider 
+           id="investment"
+           min="100" max="1000" 
+           value="500"
+           step="100">
+    <p class="slider-description">Range: 100-1000, Step: 100</p>
 
     <h2>RTL (Right-to-Left) Mode</h2>
     
@@ -57,6 +75,7 @@
                id="fontSizeRTL"
                min="0" max="100" 
                value="51">
+        <p class="slider-description">النطاق: 0-100، الخطوة: 1</p>
 
         <!-- Drop shadow RTL -->
         <label for="dropShadowRTL">تأثير الظل</label>
@@ -65,6 +84,7 @@
                id="dropShadowRTL"
                min="1" max="5" 
                value="3">
+        <p class="slider-description">النطاق: 1-5، خطوات صحيحة</p>
 
         <!-- Weight RTL -->
         <label for="weightRTL">الوزن (كجم)</label>
@@ -74,6 +94,17 @@
                min="0" max="100" 
                value="75.5"
                step="0.1">
+        <p class="slider-description">النطاق: 0-100، الخطوة: 0.1</p>
+
+        <!-- Investment RTL -->
+        <label for="investmentRTL">مبلغ الاستثمار ($)</label>
+        <input type="range" 
+               data-dxb-slider 
+               id="investmentRTL"
+               min="100" max="1000" 
+               value="500"
+               step="100">
+        <p class="slider-description">النطاق: 100-1000، الخطوة: 100</p>
     </div>
 
     <script src="dxb-slider.min.js"></script>
