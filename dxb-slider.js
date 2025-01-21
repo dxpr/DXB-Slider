@@ -62,7 +62,10 @@
   const sliderStateProxy = new Proxy({}, {
     set(target, key, value) {
       target[key] = value;
-      const fields = document.querySelectorAll(`[data-dxb-proxy-key="${key}"]`);
+
+      const rangeInputWrapper = document.getElementById(key).closest(".dxb-slider-wrapper");
+      const fields = rangeInputWrapper.querySelectorAll('input');
+
       fields.forEach(field => updateFieldValue(field, value));
       return true;
     }
@@ -97,15 +100,22 @@
           return;
         }
 
+        let proxyKey = e.target.id;
+
+        if (e.target.type === "number") {
+          const rangeInputWrapper = e.target.closest(".dxb-slider-wrapper");
+          proxyKey = rangeInputWrapper.querySelector("input").id;
+        }
+
         // Reset the input value to the previously stored value if it exceeds the maximum allowed value
         const newValue = Number(e.target.value);
         const max = e.target.max;
 
         if (max && newValue > e.target.max) {
-          e.target.value = sliderStateProxy[e.target.dataset["dxbProxyKey"]]
+          e.target.value = sliderStateProxy[proxyKey]
         }
 
-        sliderStateProxy[e.target.dataset["dxbProxyKey"]] = e.target.value;
+        sliderStateProxy[proxyKey] = e.target.value;
       }
 
       [rangeInput, numberInput].forEach(input =>
@@ -113,7 +123,7 @@
       );
 
       // Initialize the proxy with the initial value of the range input
-      sliderStateProxy[rangeInput.dataset["dxbProxyKey"]] = rangeInput.value;
+      sliderStateProxy[rangeInput.id] = rangeInput.value;
 
       // Set initial ARIA attributes
       rangeInput.setAttribute('aria-valuemin', rangeInput.min);
@@ -131,8 +141,6 @@
       numberInput.min = min;
       numberInput.max = max;
       numberInput.name = rangeInput.name;
-
-      numberInput.setAttribute("data-dxb-proxy-key", rangeInput.dataset["dxbProxyKey"]);
 
       rangeInput.setAttribute('aria-valuenow', value);
 
