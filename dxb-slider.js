@@ -97,6 +97,14 @@
           return;
         }
 
+        // Reset the input value to the previously stored value if it exceeds the maximum allowed value
+        const newValue = Number(e.target.value);
+        const max = e.target.max;
+
+        if (max && newValue > e.target.max) {
+          e.target.value = sliderStateProxy[e.target.dataset["dxbProxyKey"]]
+        }
+
         sliderStateProxy[e.target.dataset["dxbProxyKey"]] = e.target.value;
       }
 
