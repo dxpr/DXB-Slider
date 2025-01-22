@@ -77,6 +77,15 @@ describe('DXB Slider Core Tests', () => {
     expect(slider.value).toBe('80');
   });
 
+  it('should clamp value to max when number input exceeds max limit', () => {
+    numberInput.max = 100;
+    numberInput.value = 1000;
+    numberInput.dispatchEvent(new window.Event('input'));
+
+    expect(numberInput.value).toBe('100');
+  });
+
+
   it('should synchronize values on number input change (0 based)', () => {
     numberInput.value = "";
     numberInput.dispatchEvent(new window.Event('input'));

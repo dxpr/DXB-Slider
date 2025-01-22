@@ -68,6 +68,14 @@
         return;
       }
 
+      // Reset the input value to the previously stored value if it exceeds the maximum allowed value
+      const newValue = Number(value);
+      const max = validInput.max;
+
+      if (max && newValue > max) {
+        value = max;
+      }
+
       target[key] = value;
 
       const rangeInputWrapper = validInput.closest(".dxb-slider-wrapper");
@@ -124,14 +132,6 @@
         if (e.target.type === "number") {
           const rangeInputWrapper = e.target.closest(".dxb-slider-wrapper");
           proxyKey = rangeInputWrapper.querySelector("input").id;
-        }
-
-        // Reset the input value to the previously stored value if it exceeds the maximum allowed value
-        const newValue = Number(e.target.value);
-        const max = e.target.max;
-
-        if (max && newValue > e.target.max) {
-          e.target.value = sliderStateProxy[proxyKey]
         }
 
         sliderStateProxy[proxyKey] = e.target.value;
