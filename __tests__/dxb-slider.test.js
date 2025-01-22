@@ -59,6 +59,7 @@ describe('DXB Slider Core Tests', () => {
     const newSlider = document.createElement('input');
     newSlider.type = 'range';
     newSlider.setAttribute('data-dxb-slider', '');
+    newSlider.id = "myNewSlider";
 
     // Append the new slider to the DOM
     document.body.appendChild(newSlider);

@@ -61,9 +61,16 @@
   // Proxy object to synchronize field values and update all matching fields when a value changes
   const sliderStateProxy = new Proxy({}, {
     set(target, key, value) {
+
+      // Guard: If no valid input is found
+      const validInput = document.getElementById(key);
+      if (!validInput) {
+        return;
+      }
+
       target[key] = value;
 
-      const rangeInputWrapper = document.getElementById(key).closest(".dxb-slider-wrapper");
+      const rangeInputWrapper = validInput.closest(".dxb-slider-wrapper");
       const fields = rangeInputWrapper.querySelectorAll('input');
 
       fields.forEach(field => updateFieldValue(field, value));
@@ -73,6 +80,18 @@
 
   function initDXBSliders() {
     document.querySelectorAll('[data-dxb-slider]:not([data-dxb-initialized])').forEach(rangeInput => {
+
+      // Guard: Ensure the range input has a valid "id" 
+      // Missing an "id" breaks slider functionality and can cause errors or infinite loops in the MutationObserver.
+      if (!rangeInput.id) {
+        console.error(
+          `DXB Slider Error: A range input is missing a required "id" attribute. Initialization skipped. 
+        Element details: ${rangeInput.outerHTML}`
+        );
+
+        return;
+      }
+
       const wrapper = createSliderStructure(rangeInput);
 
       // Create number input programmatically
