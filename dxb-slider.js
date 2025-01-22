@@ -137,9 +137,9 @@
         sliderStateProxy[proxyKey] = e.target.value;
       }
 
-      [rangeInput, numberInput].forEach(input =>
-        input.addEventListener('input', handleInputChange)
-      );
+      rangeInput.addEventListener('input', handleInputChange);
+
+      numberInput.addEventListener('input', handleInputChange);
 
       // Initialize the proxy with the initial value of the range input
       sliderStateProxy[rangeInput.id] = rangeInput.value;
