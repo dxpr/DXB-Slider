@@ -68,12 +68,19 @@
         return;
       }
 
-      // Reset the input value to the previously stored value if it exceeds the maximum allowed value
+      // Convert input value to a number
       const newValue = Number(value);
-      const max = validInput.max;
+      const max = validInput.max !== "" ? Number(validInput.max) : null;
+      const min = validInput.min !== "" ? Number(validInput.min) : null;
 
-      if (max && newValue > max) {
+      // Reset the input value if it exceeds the maximum allowed value
+      if (max !== null && newValue > max) {
         value = max;
+      }
+
+      // Reset the input value if it falls below the minimum allowed value
+      if (min !== null && newValue < min) {
+        value = min;
       }
 
       target[key] = value;
@@ -132,6 +139,14 @@
         if (e.target.type === "number") {
           const rangeInputWrapper = e.target.closest(".dxb-slider-wrapper");
           proxyKey = rangeInputWrapper.querySelector("input").id;
+        }
+
+        const eventValue = e.data; // Capture only the newly entered character from the event
+
+        // Allow negative sign (-) or decimal point (.) to be temporarily entered
+        // This prevents premature validation while the user is still typing
+        if (eventValue === "-" || eventValue === ".") {
+          return;
         }
 
         sliderStateProxy[proxyKey] = e.target.value;
