@@ -25,19 +25,6 @@
     return wrapper;
   }
 
-  function getDefaultValue(num) {
-
-    // Convert the input to a number
-    const convertedNum = Number(num);
-
-    // Check if the converted number is not finite (e.g., NaN, Infinity)
-    if (!isFinite(convertedNum)) {
-      return 0;
-    }
-
-    return Math.ceil(convertedNum / 2);
-  }
-
   function getRangePercent(value = 0, min = 0, max = 0) {
     return ((value - min) / (max - min)) * 100;
   }
