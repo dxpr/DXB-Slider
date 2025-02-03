@@ -44,17 +44,20 @@
 
   function updateFieldValue(field, value) {
 
-    if (['number', 'range'].includes(field.type)) {
+    if (field.type === "number") {
+      // Allow the input to be empty or actual value
+      const val = value === "" ? "" : Number(value);
+      field.value = val;
+    }
 
-      // Set value to default if empty, else convert to valid number
-      field.value = value || getDefaultValue(field.max);
+    if (field.type === "range") {
+      const val = Number(value) || 0;
+      field.value = val;
 
       // Apply additional settings for range inputs
-      if (field.type === "range") {
-        const percent = getRangePercent(field.value, field.min, field.max);
-        field.style.setProperty('--value-percent', `${percent}%`);
-        field.setAttribute('aria-valuenow', field.value);
-      }
+      const percent = getRangePercent(field.value, field.min, field.max);
+      field.style.setProperty('--value-percent', `${percent}%`);
+      field.setAttribute('aria-valuenow', field.value);
     }
   }
 

@@ -90,14 +90,14 @@ describe('DXB Slider Core Tests', () => {
     numberInput.value = "";
     numberInput.dispatchEvent(new window.Event('input'));
 
-    expect(slider.value).toBe('50');
+    expect(slider.value).toBe('0');
   });
 
   it('should synchronize values on number input change (empty)', () => {
     numberInput.value = "";
     numberInput.dispatchEvent(new window.Event('input'));
 
-    expect(numberInput.value).toBe('50');
+    expect(numberInput.value).toBe('');
   });
 
   it('should set initial ARIA attributes', () => {
