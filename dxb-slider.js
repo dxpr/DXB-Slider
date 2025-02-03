@@ -70,7 +70,8 @@
 
       // Reset the input value if it falls below the minimum allowed value
       if (min !== null && newValue < min) {
-        value = min;
+        // Allow emptiness when clearing
+        value = value === "" ? "" : min;
       }
 
       target[key] = value;
