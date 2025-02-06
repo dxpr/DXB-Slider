@@ -29,12 +29,35 @@
     return ((value - min) / (max - min)) * 100;
   }
 
+  function roundToPrecision(value, step) {
+    const precision = (step.toString().split(".")[1] || "").length; // Get decimal places in step
+    return parseFloat(value.toFixed(precision)); // Ensure correct precision
+  }
+
   function updateFieldValue(field, value) {
 
     if (field.type === "number") {
-      // Allow the input to be empty or actual value
-      const val = value === "" ? "" : Number(value);
-      field.value = val;
+
+      // Allow the input to be empty
+      if (value === "") {
+        field.value = value;
+        return;
+      }
+
+      // Parse min, max, and step values from the field attributes
+      const min = parseFloat(field.min);
+      const max = parseFloat(field.max);
+      const step = parseFloat(field.step) || 1; // Default step to 1 if not specified
+      const currentValue = parseFloat(value);
+
+      // Ensure the value stays within the min/max range
+      const val = Math.max(min, Math.min(currentValue, max));
+
+      // Round the value to the nearest step increment
+      const roundedValue = Math.round((val - min) / step) * step + min;
+
+      // Ensure precision is maintained when updating the field value
+      field.value = roundToPrecision(roundedValue, field.step);
     }
 
     if (field.type === "range") {
