@@ -35,8 +35,8 @@ npm install @dxpr/dxb-slider
 Include the CSS and JavaScript files directly from jsDelivr CDN:
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@dxpr/dxb-slider@1.0.0/dxb-slider.min.css">
-<script src="https://cdn.jsdelivr.net/npm/@dxpr/dxb-slider@1.0.0/dxb-slider.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@dxpr/dxb-slider@2.0.0/dxb-slider.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@dxpr/dxb-slider@2.0.0/dxb-slider.min.js"></script>
 ```
 
 Or use the latest version (not recommended for production):
@@ -56,7 +56,7 @@ Download the files directly from the [GitHub repository](https://github.com/dxpr
     <link rel="stylesheet" href="node_modules/@dxpr/dxb-slider/dxb-slider.min.css">
     
     <!-- Or using CDN -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@dxpr/dxb-slider@1.0.0/dxb-slider.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@dxpr/dxb-slider@2.0.0/dxb-slider.min.css">
     ```
 
 2. Add the HTML structure for your slider:
@@ -80,7 +80,7 @@ Download the files directly from the [GitHub repository](https://github.com/dxpr
     <script src="node_modules/@dxpr/dxb-slider/dxb-slider.min.js"></script>
     
     <!-- Or using CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/@dxpr/dxb-slider@1.0.0/dxb-slider.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@dxpr/dxb-slider@2.0.0/dxb-slider.min.js"></script>
     ```
 
 4. The sliders will be automatically initialized for all elements with the `data-dxb-slider` attribute, including those added dynamically after page load.
