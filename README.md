@@ -21,6 +21,7 @@ DXB Slider is a lightweight, customizable range slider component with a programm
 *   Support for both LTR (Left-to-Right) and RTL (Right-to-Left) layouts
 *   Language-specific numeral display (pending broader browser adoption)
 *   Optimized for mobile devices with appropriate software keyboard support
+*   **New in 2.0.0:** Automatic wrapper generation - just add a label and input!
 
 ## Installation
 
@@ -59,20 +60,18 @@ Download the files directly from the [GitHub repository](https://github.com/dxpr
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@dxpr/dxb-slider@2.0.0/dxb-slider.min.css">
     ```
 
-2. Add the HTML structure for your slider:
+2. Add the HTML structure for your slider - just a label and input:
     ```html
-    <div class="dxb-slider-container">
-        <label id="mySliderLabel" for="mySlider">Slider Label</label>
-        <div class="dxb-slider-wrapper">
-            <div class="dxb-slider-track">
-                <input type="range" id="mySlider" class="dxb-slider" 
-                       min="0" max="100" value="50" step="1" 
-                       data-dxb-slider
-                       aria-labelledby="mySliderLabel">
-            </div>
-        </div>
-    </div>
+    <label for="mySlider">Slider Label</label>
+    <input type="range" 
+           id="mySlider"
+           data-dxb-slider
+           min="0" max="100" 
+           value="50" 
+           step="1">
     ```
+
+    The JavaScript will automatically generate the necessary wrapper elements and number input.
 
 3. Include the JavaScript at the end of your `<body>` tag:
     ```html
@@ -89,11 +88,17 @@ Download the files directly from the [GitHub repository](https://github.com/dxpr
 
 ## RTL Support and Language-Specific Numerals
 
-To use the slider in RTL mode, add the `dir="rtl"` attribute to the container:
+To use the slider in RTL mode, add the `dir="rtl"` attribute to a parent element:
 
-```
-<div class="dxb-slider-container" dir="rtl" lang="ar">
-    <!-- ... slider content ... -->
+```html
+<div dir="rtl" lang="ar">
+    <label for="mySlider">عنوان المنزلق</label>
+    <input type="range" 
+           id="mySlider"
+           data-dxb-slider
+           min="0" max="100" 
+           value="50" 
+           step="1">
 </div>
 ```
 
@@ -188,7 +193,7 @@ DXB Slider is optimized for mobile devices, providing an enhanced user experienc
     
 *   **Q: How do I enable RTL support?**
     
-    A: Add the `dir="rtl"` attribute to the container. Refer to the RTL Support section for more details.
+    A: Add the `dir="rtl"` attribute to a parent element. Refer to the RTL Support section for more details.
     
 *   **Q: What browsers are supported?**
     
