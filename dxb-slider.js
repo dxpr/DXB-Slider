@@ -81,24 +81,52 @@
 
   initDXBSliders();
 
+  // Throttle function
+  let throttleTimer = null;
+  const throttle = (callback, time) => {
+    if (throttleTimer) return;
+    throttleTimer = setTimeout(() => {
+      callback();
+      throttleTimer = null;
+    }, time);
+  };
+
   const observer = new MutationObserver(mutations => {
     let shouldInit = false;
     for (const mutation of mutations) {
-      if (mutation.type === 'childList') {
+      if (mutation.type === 'childList' && mutation.addedNodes.length) {
         for (const node of mutation.addedNodes) {
-          if (node.nodeType === Node.ELEMENT_NODE && 
-              (node.matches('[data-dxb-slider]') || node.querySelector('[data-dxb-slider]'))) {
-            shouldInit = true;
-            break;
+          if (node.nodeType === Node.ELEMENT_NODE) {
+            // Check if the added node itself is a target slider input
+            if (node.tagName === 'INPUT' && 
+                node.type === 'range' && 
+                node.hasAttribute('data-dxb-slider') &&
+                !node.hasAttribute('data-dxb-initialized')) {
+              shouldInit = true;
+              break;
+            }
+            // Check if the added node contains a target slider input
+            const targetInput = node.querySelector('input[type="range"][data-dxb-slider]:not([data-dxb-initialized])');
+            if (targetInput) {
+              shouldInit = true;
+              break;
+            }
           }
         }
         if (shouldInit) break;
       }
     }
     if (shouldInit) {
-      initDXBSliders();
+      throttle(() => {
+        initDXBSliders();
+      }, 250); // Throttle initialization to 250ms
     }
   });
 
-  observer.observe(document.body, { childList: true, subtree: true });
+  observer.observe(document.body, { 
+    childList: true, 
+    subtree: true,
+    attributes: false, // Optimization: ignore attribute changes
+    characterData: false // Optimization: ignore character data changes
+  });
 })();
