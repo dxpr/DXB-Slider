@@ -65,6 +65,17 @@
            step="100">
     <p class="slider-description">Range: 100-1000, Step: 100</p>
 
+    <!-- Financial Balance -->
+    <label for="balance">Account Balance ($)</label>
+    <input type="range" 
+           data-dxb-slider 
+           id="balance" 
+           min="-1000" 
+           max="1000" 
+           value="0" 
+           step="50">
+    <p class="slider-description">Range: -1000 to 1000, Step: 50</p>
+
     <h2>RTL (Right-to-Left) Mode</h2>
     
     <div dir="rtl" lang="ar">
@@ -105,6 +116,17 @@
                value="500"
                step="100">
         <p class="slider-description">النطاق: 100-1000، الخطوة: 100</p>
+
+        <!-- Financial Balance -->
+        <label for="balance">رصيد الحساب ($)</label>
+        <input type="range" 
+               data-dxb-slider 
+               id="balanceRTL" 
+               min="-1000" 
+               max="1000" 
+               value="0" 
+               step="50">
+        <p class="slider-description">النطاق: 1000- الى 1000، الخطوة: 100</p>
     </div>
 
     <script src="dxb-slider.min.js"></script>

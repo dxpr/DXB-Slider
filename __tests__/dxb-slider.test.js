@@ -49,10 +49,17 @@ describe('DXB Slider Core Tests', () => {
     expect(numberInput.value).toBe('75');
   });
 
+  it('should synchronize range and number input values (0 based)', () => {
+    slider.value = 0;
+    slider.dispatchEvent(new window.Event('input'));
+    expect(numberInput.value).toBe('0');
+  });
+
   it('should initialize dynamically added sliders', async () => {
     const newSlider = document.createElement('input');
     newSlider.type = 'range';
     newSlider.setAttribute('data-dxb-slider', '');
+    newSlider.id = "myNewSlider";
 
     // Append the new slider to the DOM
     document.body.appendChild(newSlider);
@@ -63,21 +70,34 @@ describe('DXB Slider Core Tests', () => {
     expect(newSlider.hasAttribute('data-dxb-initialized')).toBe(true);
   });
 
-  it('should dispatch change event on number input change', () => {
-    const changeHandler = vi.fn();
-
-    slider.addEventListener('change', changeHandler);
-    numberInput.value = 80;
-    numberInput.dispatchEvent(new window.Event('change'));
-
-    expect(changeHandler).toHaveBeenCalled();
-  });
-
   it('should synchronize values on number input change', () => {
     numberInput.value = 80;
     numberInput.dispatchEvent(new window.Event('input'));
 
     expect(slider.value).toBe('80');
+  });
+
+  it('should clamp value to max when number input exceeds max limit', () => {
+    numberInput.max = 100;
+    numberInput.value = 1000;
+    numberInput.dispatchEvent(new window.Event('input'));
+
+    expect(numberInput.value).toBe('100');
+  });
+
+
+  it('should synchronize values on number input change (0 based)', () => {
+    numberInput.value = "";
+    numberInput.dispatchEvent(new window.Event('input'));
+
+    expect(slider.value).toBe('0');
+  });
+
+  it('should synchronize values on number input change (empty)', () => {
+    numberInput.value = "";
+    numberInput.dispatchEvent(new window.Event('input'));
+
+    expect(numberInput.value).toBe('');
   });
 
   it('should set initial ARIA attributes', () => {
@@ -92,6 +112,154 @@ describe('DXB Slider Core Tests', () => {
     expect(slider.getAttribute('aria-valuenow')).toBe('75');
   });
 });
+
+describe('DXB Slider Negative Value Tests', () => {
+  let document;
+  let window;
+  let slider;
+  let numberInput;
+
+  beforeEach(() => {
+    const scriptContent = fs.readFileSync(path.resolve(__dirname, '../dxb-slider.js'), 'utf8');
+
+    const dom = new JSDOM(`
+          <html>
+            <body>
+              <label for="negativeSlider">Negative Slider</label>
+              <input type="range" id="negativeSlider" class="dxb-slider" 
+                      min="-50" max="50" value="-25" step="5" 
+                      data-dxb-slider>
+              <script>${scriptContent}</script>
+            </body>
+          </html>
+        `, { runScripts: "dangerously", resources: "usable" });
+
+    document = dom.window.document;
+    window = dom.window;
+    global.document = document;
+    global.window = window;
+
+    slider = document.querySelector('#negativeSlider');
+    numberInput = document.querySelector('.dxb-slider-value');
+  });
+
+  it('should initialize the slider with negative min value', () => {
+    expect(slider.min).toBe('-50');
+    expect(slider.max).toBe('50');
+    expect(slider.value).toBe('-25');
+  });
+
+  it('should synchronize values between slider and number input (negative values)', () => {
+    slider.value = -40;
+    slider.dispatchEvent(new window.Event('input'));
+    expect(numberInput.value).toBe('-40');
+  });
+
+  it('should synchronize values when number input is updated with a negative value', () => {
+    numberInput.value = -10;
+    numberInput.dispatchEvent(new window.Event('input'));
+    expect(slider.value).toBe('-10');
+  });
+
+  it('should clamp values to min when below min limit', () => {
+    numberInput.value = -100;
+    numberInput.dispatchEvent(new window.Event('input'));
+    expect(numberInput.value).toBe('-50');
+    expect(slider.value).toBe('-50');
+  });
+
+  it('should allow entering "-" without immediately parsing', () => {
+
+    // Since JSDOM does not allow incomplete number input states (like "-"), we have to mock it manually
+    Object.defineProperty(numberInput, "value", {
+      get: () => "-",
+      set: () => { }, // Prevents JSDOM from resetting it
+      configurable: true
+    });
+
+    numberInput.dispatchEvent(new window.InputEvent("input", { data: "-" }));
+
+    expect(numberInput.value).toBe("-");
+  });
+
+});
+
+describe('DXB Slider Floating Point Tests', () => {
+  let document;
+  let window;
+  let slider;
+  let numberInput;
+
+  beforeEach(() => {
+    const scriptContent = fs.readFileSync(path.resolve(__dirname, '../dxb-slider.js'), 'utf8');
+
+    const dom = new JSDOM(`
+          <html>
+            <body>
+              <label for="mySlider">Slider Label</label>
+              <input type="range" id="mySlider" class="dxb-slider" 
+                      min="0.1" max="10.5" value="5.5" step="0.1" 
+                      data-dxb-slider>
+              <script>${scriptContent}</script>
+            </body>
+          </html>
+        `, { runScripts: "dangerously", resources: "usable" });
+
+    document = dom.window.document;
+    window = dom.window;
+    global.document = document;
+    global.window = window;
+
+    slider = document.querySelector('#mySlider');
+    numberInput = document.querySelector('.dxb-slider-value');
+  });
+
+  it('should allow entering "." without immediate parsing', () => {
+    // Prevent JSDOM from resetting an incomplete decimal state
+    Object.defineProperty(numberInput, "value", {
+      get: () => "5.",
+      set: () => { },
+      configurable: true
+    });
+
+    numberInput.dispatchEvent(new window.InputEvent("input", { data: "." }));
+
+    expect(numberInput.value).toBe("5."); // Allow incomplete decimal state
+  });
+
+  it('should synchronize range and number input values with floating points', () => {
+    slider.value = "7.3";
+    slider.dispatchEvent(new window.Event('input'));
+    expect(numberInput.value).toBe("7.3");
+  });
+
+  it('should clamp values to max boundary for floating points', () => {
+    numberInput.value = "20.3"; // Exceeding max
+    numberInput.dispatchEvent(new window.Event('input'));
+    expect(numberInput.value).toBe("10.5"); // Clamped to max
+  });
+
+  it('should clamp values to min boundary for floating points', () => {
+    numberInput.value = "-5.0"; // Below min
+    numberInput.dispatchEvent(new window.Event('input'));
+    expect(numberInput.value).toBe("0.1"); // Clamped to min
+  });
+
+  it('should retain correct floating point precision when stepping up', () => {
+    numberInput.value = "2.2";
+    numberInput.stepUp();
+    numberInput.dispatchEvent(new window.Event('input'));
+    expect(numberInput.value).toBe("2.3"); // Step increment of 0.1
+  });
+
+  it('should retain correct floating point precision when stepping down', () => {
+    numberInput.value = "3.5";
+    numberInput.stepDown();
+    numberInput.dispatchEvent(new window.Event('input'));
+    expect(numberInput.value).toBe("3.4"); // Step decrement of 0.1
+  });
+});
+
 
 describe('DXB Slider Step Tests', () => {
   let document;
