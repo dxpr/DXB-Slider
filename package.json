@@ -1,7 +1,17 @@
 {
-  "name": "dxb_slider",
+  "name": "@dxpr/dxb-slider",
+  "version": "2.0.1",
   "description": "Customizable Range Slider with RTL Support and WCAG AA Accessibility features",
   "main": "dxb-slider.js",
+  "filename": "dxb-slider.min.js",
+  "jsdelivr": "dxb-slider.min.js",
+  "style": "dxb-slider.min.css",
+  "files": [
+    "dxb-slider.js",
+    "dxb-slider.min.js",
+    "dxb-slider.css",
+    "dxb-slider.min.css"
+  ],
   "scripts": {
     "test": "vitest run",
     "build": "gulp minify-js && gulp minify-css",
@@ -16,8 +26,12 @@
   "keywords": [
     "range",
     "slider",
-    "with",
-    "side-input"
+    "input",
+    "form",
+    "ui",
+    "rtl",
+    "accessibility",
+    "wcag"
   ],
   "author": "DXPR",
   "license": "GPL-2.0",

@@ -1,5 +1,10 @@
 # DXB Slider - Customizable Range + Number Input Slider with RTL Support and WCAG AA Accessibility features
 
+[![npm version](https://img.shields.io/npm/v/@dxpr/dxb-slider.svg)](https://www.npmjs.com/package/@dxpr/dxb-slider)
+[![npm downloads](https://img.shields.io/npm/dm/@dxpr/dxb-slider.svg)](https://www.npmjs.com/package/@dxpr/dxb-slider)
+[![License](https://img.shields.io/npm/l/@dxpr/dxb-slider.svg)](https://github.com/dxpr/DXB-Slider/blob/main/LICENSE)
+[![jsDelivr hits](https://data.jsdelivr.com/v1/package/npm/@dxpr/dxb-slider/badge)](https://www.jsdelivr.com/package/npm/@dxpr/dxb-slider)
+
 [DXB Slider demo page](https://dxpr.github.io/DXB-Slider/)
 
 DXB Slider is a lightweight, customizable range slider component with a programmatically added number input. It's designed to be easy to implement, accessible, styleable, and supports both LTR and RTL layouts.
@@ -16,52 +21,84 @@ DXB Slider is a lightweight, customizable range slider component with a programm
 *   Support for both LTR (Left-to-Right) and RTL (Right-to-Left) layouts
 *   Language-specific numeral display (pending broader browser adoption)
 *   Optimized for mobile devices with appropriate software keyboard support
+*   **New in 2.0.0:** Automatic wrapper generation - just add a label and input!
 
 ## Installation
 
-To use DXB Slider, include the CSS and JavaScript files in your project, and follow the usage instructions below.
+You can install DXB Slider in several ways:
+
+### npm
+```bash
+npm install @dxpr/dxb-slider
+```
+
+### CDN
+Include the CSS and JavaScript files directly from jsDelivr CDN:
+
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@dxpr/dxb-slider@2.0.0/dxb-slider.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@dxpr/dxb-slider@2.0.0/dxb-slider.min.js"></script>
+```
+
+Or use the latest version (not recommended for production):
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@dxpr/dxb-slider@latest/dxb-slider.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@dxpr/dxb-slider@latest/dxb-slider.min.js"></script>
+```
+
+### Manual Download
+Download the files directly from the [GitHub repository](https://github.com/dxpr/DXB-Slider).
 
 ## Usage
 
-1.  Include the CSS in your `<head>` tag:
+1. Include the CSS in your `<head>` tag:
+    ```html
+    <!-- Using npm -->
+    <link rel="stylesheet" href="node_modules/@dxpr/dxb-slider/dxb-slider.min.css">
     
+    <!-- Or using CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@dxpr/dxb-slider@2.0.0/dxb-slider.min.css">
     ```
-    <link rel="stylesheet" href="path/to/dxb-slider.min.css">
+
+2. Add the HTML structure for your slider - just a label and input:
+    ```html
+    <label for="mySlider">Slider Label</label>
+    <input type="range" 
+           id="mySlider"
+           data-dxb-slider
+           min="0" max="100" 
+           value="50" 
+           step="1">
     ```
+
+    The JavaScript will automatically generate the necessary wrapper elements and number input.
+
+3. Include the JavaScript at the end of your `<body>` tag:
+    ```html
+    <!-- Using npm -->
+    <script src="node_modules/@dxpr/dxb-slider/dxb-slider.min.js"></script>
     
-2.  Add the HTML structure for your slider:
-    
+    <!-- Or using CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@dxpr/dxb-slider@2.0.0/dxb-slider.min.js"></script>
     ```
-    <div class="dxb-slider-container">
-        <label id="mySliderLabel" for="mySlider">Slider Label</label>
-        <div class="dxb-slider-wrapper">
-            <div class="dxb-slider-track">
-                <input type="range" id="mySlider" class="dxb-slider" 
-                       min="0" max="100" value="50" step="1" 
-                       data-dxb-slider
-                       aria-labelledby="mySliderLabel">
-            </div>
-        </div>
-    </div>
-    ```
+
+4. The sliders will be automatically initialized for all elements with the `data-dxb-slider` attribute, including those added dynamically after page load.
     
-3.  Include the JavaScript at the end of your `<body>` tag:
-    
-    ```
-    <script src="path/to/dxb-slider.min.js"></script>
-    ```
-    
-4.  The sliders will be automatically initialized for all elements with the `data-dxb-slider` attribute, including those added dynamically after page load.
-    
-5.  The sliders will automatically adjust for mobile devices, displaying the appropriate software keyboard (numeric or decimal) based on the slider's configuration.
+5. The sliders will automatically adjust for mobile devices, displaying the appropriate software keyboard (numeric or decimal) based on the slider's configuration.
 
 ## RTL Support and Language-Specific Numerals
 
-To use the slider in RTL mode, add the `dir="rtl"` attribute to the container:
+To use the slider in RTL mode, add the `dir="rtl"` attribute to a parent element:
 
-```
-<div class="dxb-slider-container" dir="rtl" lang="ar">
-    <!-- ... slider content ... -->
+```html
+<div dir="rtl" lang="ar">
+    <label for="mySlider">عنوان المنزلق</label>
+    <input type="range" 
+           id="mySlider"
+           data-dxb-slider
+           min="0" max="100" 
+           value="50" 
+           step="1">
 </div>
 ```
 
@@ -156,7 +193,7 @@ DXB Slider is optimized for mobile devices, providing an enhanced user experienc
     
 *   **Q: How do I enable RTL support?**
     
-    A: Add the `dir="rtl"` attribute to the container. Refer to the RTL Support section for more details.
+    A: Add the `dir="rtl"` attribute to a parent element. Refer to the RTL Support section for more details.
     
 *   **Q: What browsers are supported?**
     
