@@ -58,13 +58,10 @@
       }
 
       rangeInput.addEventListener('input', updateValue);
-      numberInput.addEventListener('input', () => {
+      numberInput.addEventListener('change', () => {
         rangeInput.value = numberInput.value;
         updateValue();
         rangeInput.dispatchEvent(new Event('input', { bubbles: true }));
-      });
-
-      numberInput.addEventListener('change', () => {
         rangeInput.dispatchEvent(new Event('change', { bubbles: true }));
       });
 
@@ -81,12 +78,12 @@
 
   initDXBSliders();
 
-  // Throttle function
+  // Leading-edge throttle: fires immediately, then ignores calls for `time` ms
   let throttleTimer = null;
   const throttle = (callback, time) => {
     if (throttleTimer) return;
+    callback();
     throttleTimer = setTimeout(() => {
-      callback();
       throttleTimer = null;
     }, time);
   };
