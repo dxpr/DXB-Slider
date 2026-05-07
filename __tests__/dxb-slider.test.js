@@ -75,7 +75,7 @@ describe('DXB Slider Core Tests', () => {
 
   it('should synchronize values on number input change', () => {
     numberInput.value = 80;
-    numberInput.dispatchEvent(new window.Event('input'));
+    numberInput.dispatchEvent(new window.Event('change'));
 
     expect(slider.value).toBe('80');
   });
@@ -137,14 +137,14 @@ describe('DXB Slider Step Tests', () => {
 
   it('should update the slider when number input value changes', () => {
     numberInput.value = 15;
-    numberInput.dispatchEvent(new window.Event('input'));
+    numberInput.dispatchEvent(new window.Event('change'));
     expect(slider.value).toBe("15");
   });
 
   it('should keep slider in sync with number input on step increment', () => {
     numberInput.value = 15;
     numberInput.stepUp();
-    numberInput.dispatchEvent(new window.Event('input'));
+    numberInput.dispatchEvent(new window.Event('change'));
     expect(numberInput.value).toBe("20");
     expect(slider.value).toBe("20");
   });
@@ -152,7 +152,7 @@ describe('DXB Slider Step Tests', () => {
   it('should keep slider in sync with number input on step decrement', () => {
     numberInput.value = 20;
     numberInput.stepDown();
-    numberInput.dispatchEvent(new window.Event('input'));
+    numberInput.dispatchEvent(new window.Event('change'));
     expect(numberInput.value).toBe("15");
     expect(slider.value).toBe("15");
   });
